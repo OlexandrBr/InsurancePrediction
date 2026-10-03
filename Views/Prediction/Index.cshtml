@@ -1,0 +1,43 @@
+@model InsuranceModel.ModelInput
+
+<h1>Prediction</h1>
+
+<form asp-action="Index" method="post">
+    <label>Вік</label>
+    <input type="number" name="Age" value="@Model.Age" min="18" max="100" required />
+
+    <label>Стать</label>
+    <select asp-for="Sex">
+        <option value="male">Чоловіча</option>
+        <option value="female">Жіноча</option>
+    </select>
+
+    <label>Індекс маси тіла (BMI)</label>
+    <input type="number" name="Bmi" value="@Model.Bmi" min="10" max="60" step="0.1" required />
+
+    <label>Кількість дітей</label>
+    <input type="number" name="Children" value="@Model.Children" min="0" max="10" required />
+
+    <label>Курить</label>
+    <select asp-for="Smoker">
+        <option value="False">Ні</option>
+        <option value="True">Так</option>
+    </select>
+
+    <label>Регіон</label>
+    <select asp-for="Region">
+        <option value="northeast">Північний схід</option>
+        <option value="northwest">Північний захід</option>
+        <option value="southeast">Південний схід</option>
+        <option value="southwest">Південний захід</option>
+    </select>
+
+    <button type="submit">Спрогнозувати</button>
+</form>
+
+@if (ViewBag.Result != null)
+{
+    <div class="result">
+        Прогнозована вартість страхування: <b>$@ViewBag.Result.ToString("N2")</b> на рік
+    </div>
+}
